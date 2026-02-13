@@ -5,6 +5,18 @@ package frogger;
  *
  * @author Zishen Wen (F22), Deyuan Chen (S22), Duan Liang (F23)
  */
+// Task 1
+// Problem: Originallty, frogger class reached into Road and grabbed boolean[] arr
+// that task should belong to Road; checking if positions are valid - Feature Envy
+// if road changes how it stores, Frogger breaks and needs to change too
+// also high coupling
+//solution: remove getOccupied, and have Road provide methods to check if pos is valid and occupied
+// information expert principle: road should answer questions about its own state, not Frogger
+
+// Task 2
+// Frogger had long list with parameters, with 6 fields
+// Have to change entire constructor if we want to add a new field
+// Solution: use FroggerID parameter obkect to store identity info, pass in 1 object instead
 public class Frogger {
 
     // Field for task 1.
