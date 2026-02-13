@@ -12,7 +12,23 @@ public class Road {
         this.occupied = occupied;
     }
 
-    public boolean[] getOccupied() {
-        return this.occupied;
+    /**
+     * Checks if a position on the road is occupied.
+     * 
+     * @param position the position to check
+     * @return true if occupied, false otherwise
+     */
+    public boolean isOccupied(int position) {
+        return occupied[position];
+    }
+    
+    /**
+     * Checks if a position is valid on this road.
+     * 
+     * @param position the position to check
+     * @return true if valid, false otherwise
+     */
+    public boolean isValidPosition(int position) {
+        return position >= 0 && position < occupied.length;
     }
 }

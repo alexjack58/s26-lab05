@@ -11,21 +11,16 @@ public class Frogger {
     private final Road road;
     private int position;
     
-    // Field for task 2. Anything to add/change?
+    // Field for task 2.
     private final Records records;
-    private String firstName, lastName, phoneNumber, zipCode, state, gender;
+    private FroggerID id;
 
     public Frogger(Road road, int position, Records records, String firstName, String lastName, String phoneNumber,
     String zipCode, String state, String gender) {
         this.road = road;
         this.position = position;
         this.records = records;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.zipCode = zipCode;
-        this.state = state;
-        this.gender = gender;
+        this.id = new FroggerID(firstName, lastName, phoneNumber, zipCode, state, gender);
     }
 
     /**
@@ -36,23 +31,11 @@ public class Frogger {
      */
     public boolean move(boolean forward) {
         int nextPosition = this.position + (forward ? 1 : -1);
-        if (!isValid(nextPosition) || isOccupied(nextPosition)) {
+        if (!road.isValidPosition(nextPosition) || road.isOccupied(nextPosition)) {
             return false;
         }
         this.position = nextPosition;
         return true;
-    }
-
-    // TODO: Do you notice any issues here?
-    public boolean isOccupied(int position) {
-        boolean[] occupied = this.road.getOccupied();
-        return occupied[position];
-    }
-    
-    public boolean isValid(int position) {
-        if (position < 0) return false;
-        boolean[] occupied = this.road.getOccupied();
-        return position < occupied.length;
     }
 
     /**
@@ -61,8 +44,7 @@ public class Frogger {
      * @return true if record successful, else false.
      */
     public boolean recordMyself() {
-      boolean success = records.addRecord(firstName, lastName, phoneNumber, zipCode, state, gender);
-      return success;
+        return records.addRecord(id);
     }
 
 }
